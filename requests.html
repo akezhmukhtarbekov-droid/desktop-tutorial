@@ -1,47 +1,77 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Обращения — QoldaU.kz</title>
+    <meta charset="utf-8" />
+    <title>Обращения - QoldaU.kz</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .status-new { color: #27ae60; font-weight: bold; }
-        .status-process { color: #f39c12; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        th { background-color: #f4f4f4; }
-    </style>
 </head>
 <body>
-    <div class="main-content">
-        <h2>Список обращений</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Заявитель</th>
-                    <th>Тип услуги</th>
-                    <th>Статус</th>
-                    <th>Действие</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>#542</td>
-                    <td>Алиев Н.</td>
-                    <td>Выдача справки</td>
-                    <td class="status-new">Новое</td>
-                    <td><button>В работу</button></td>
-                </tr>
-                <tr>
-                    <td>#541</td>
-                    <td>Смагулов А.</td>
-                    <td>Консультация</td>
-                    <td class="status-process">В обработке</td>
-                    <td><button>Открыть</button></td>
-                </tr>
-            </tbody>
-        </table>
+<header class="header">
+    <div class="header-left">
+        <img src="images/logot.jpg" alt="Логотип" class="logo">
+        <div class="site-info">
+            <p class="slogan">Государственные услуги</p>
+            <p class="contacts">Тел.: 8 (700) 123-45-67 | Email: info@qoldau.kz</p>
+        </div>
     </div>
+    <div class="auth">
+        <a href="login.html" class="btn login">Войти</a>
+        <a href="registration.html" class="btn regist">Регистрация</a>
+    </div>
+</header>
+<div class="dashboard">
+    <nav class="sidebar">
+        <ul>
+            <li><a href="requests.html" class="active">Обращения</a></li>
+            <li><a href="documents.html">Документы</a></li>
+            <li><a href="schedule.html">Расписание</a></li>
+            <li><a href="stats.html">Статистика</a></li>
+            <li><a href="settings.html">Настройки</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <h2>Список обращений граждан</h2>
+        <div class="task-block">
+            <div class="filters">
+                <input type="text" placeholder="Поиск по ФИО...">
+                <select>
+                    <option>Все типы услуг</option>
+                    <option>Социальная помощь</option>
+                    <option>Юридическая консультация</option>
+                </select>
+            </div>
+            <table class="data-table" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+                <thead>
+                    <tr style="background: #f4f4f4;">
+                        <th>ID</th>
+                        <th>Заявитель</th>
+                        <th>Тип услуги</th>
+                        <th>Статус</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1204</td>
+                        <td>Ахметов А.</td>
+                        <td>Консультация</td>
+                        <td><span style="color: blue;">Новое</span></td>
+                        <td><button>Открыть</button></td>
+                    </tr>
+                    <tr>
+                        <td>#1198</td>
+                        <td>Иванова Е.</td>
+                        <td>Пособие</td>
+                        <td><span style="color: orange;">В работе</span></td>
+                        <td><button>Открыть</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+<footer class="site-footer">
+    <div class="footer-content"><p>&copy; 2026 Qamqor.ai. Все права защищены.</p></div>
+</footer>
 </body>
 </html>
