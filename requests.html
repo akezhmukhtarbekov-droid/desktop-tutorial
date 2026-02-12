@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Обращения — QoldaU.kz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .status-new { color: #27ae60; font-weight: bold; }
+        .status-process { color: #f39c12; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h2>Список обращений</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Заявитель</th>
+                    <th>Тип услуги</th>
+                    <th>Статус</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#542</td>
+                    <td>Алиев Н.</td>
+                    <td>Выдача справки</td>
+                    <td class="status-new">Новое</td>
+                    <td><button>В работу</button></td>
+                </tr>
+                <tr>
+                    <td>#541</td>
+                    <td>Смагулов А.</td>
+                    <td>Консультация</td>
+                    <td class="status-process">В обработке</td>
+                    <td><button>Открыть</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

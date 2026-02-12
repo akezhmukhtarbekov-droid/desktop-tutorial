@@ -4,45 +4,65 @@ body {
     background-size: cover;      
     background-repeat: no-repeat; 
     background-position: center; 
-
+}
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
+    justify-content: space-between; 
+    align-items: center;            
+    padding: 15px 30px;
     background: linear-gradient(135deg, #a5d6a7, #ffffff);
-    color: white;
-    margin: 0px;
+    border-radius: 0 0 20px 20px;  
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
 .logo {
-    margin : 5px;
-    float : left;
-    height : 150px;
-    width : 390px;
+    height: 100px;       
+    width: auto;
+    object-fit: contain; 
+    margin-right: 15px;  
 }
 
-.auth .btn {
+
+.auth {
+    display: flex;
+    gap: 15px;            
+}
+
+
+.btn {
     text-decoration: none;
-    padding: 10px 18px;
-    margin-left: 10px;
+    padding: 10px 20px;
     border-radius: 8px;
     font-weight: 600;
     transition: 0.3s;
 }
-
-.login  {
-    background: green;
-    color: green;
+.contacts {
+    font-family : Arial;
+    font-size : 16px;
+    color : #808080;
 }
 
+.login {
+    background-color: white;
+    color: #2e7d32;
+}
+.slogan {
+    font-family : Arial;
+    font-size : 16px;
+    color : #808080;
+}
 .regist {
-    background: green;
+    background-color: #66bb6a;
     color: white;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
 }
 .opis {
     font-family : Arial;
@@ -160,3 +180,292 @@ body {
     color: #1b5e20;  
     text-decoration: underline;
 }
+
+
+.dashboard {
+    display: flex;
+    min-height: 100vh; 
+    gap: 20px;
+    padding: 20px 5%;
+}
+
+
+.sidebar {
+    width: 220px;
+    background-color: #dcedc8; 
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #2e7d32;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #1b5e20;
+}
+
+
+.main-content {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.main-content h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #2e7d32;
+}
+
+.task-block {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.task-block:hover {
+    background-color: #e0f2db; 
+    transform: translateY(-3px); 
+}
+
+.task-block h3 {
+    margin-bottom: 10px;
+    color: #2e7d32;
+}
+
+.task-block ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: #333;
+}
+.adm-layout {
+    display: flex;
+    gap: 20px;
+    padding: 20px 5%;
+    background: #f5fbe5;
+    min-height: calc(100vh - 110px);
+}
+
+/* ������� ���� */
+.adm-sidebar {
+    width: 210px;
+    background: #dcedc8;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.adm-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.adm-sidebar li {
+    margin-bottom: 12px;
+}
+
+.adm-sidebar a {
+    text-decoration: none;
+    color: #2e7d32;
+    font-weight: 600;
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.adm-sidebar a:hover {
+    background: #b9f6ca;
+}
+
+/* ������� */
+.adm-content {
+    flex: 1;
+}
+
+.adm-title {
+    margin-bottom: 20px;
+    color: #2e7d32;
+}
+
+/* ����� �������� */
+.adm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* �������� */
+.adm-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.adm-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.adm-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.adm-card h3 {
+    color: #2e7d32;
+    margin-bottom: 8px;
+}
+
+.adm-card p {
+    font-size: 14px;
+    color: #555;
+}
+.role-switch {
+    display: flex;
+    gap: 10px;
+}
+
+/* ����� ����� */
+.role-btn {
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 2px solid transparent;
+}
+
+.citizen {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+.citizen:hover {
+    background: #a5d6a7;
+    color: white;
+}
+
+
+.worker {
+    background: #f1f8e9;
+    color: #33691e;
+}
+.worker:hover {
+    background: #81c784;
+    color: white;
+}
+
+
+.admin {
+    background: #dcedc8;
+    color: #1b5e20;
+}
+.admin:hover {
+    background: #66bb6a;
+    color: white;
+}
+.region-select {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 20px;
+}
+
+.region-select label {
+    font-size: 14px;
+    color: #1b5e20;
+    font-weight: 600;
+}
+
+#region {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 2px solid #a5d6a7;
+    background: #f1f8e9;
+    color: #1b5e20;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#region:hover {
+    background: #dcedc8;
+}
+
+#region:focus {
+    outline: none;
+    border-color: #66bb6a;
+}
+.adm-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.adm-sidebar li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.adm-sidebar li a:hover {
+    background: #f0f0f0;
+    color: #007bff;
+}
+
+.adm-sidebar span {
+    margin-right: 10px;
+    font-size: 18px;
+}
+/* Фоновая подложка */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5); /* Полупрозрачный черный */
+}
+
+/* Контентное окно */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* Кнопка закрытия */
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close:hover { color: #000; }

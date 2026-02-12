@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Документы — QoldaU.kz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .doc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
+        .doc-item { border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; background: #fff; transition: 0.3s; }
+        .doc-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .doc-icon { font-size: 40px; display: block; margin-bottom: 10px; }
+        .btn-verify { background: #27ae60; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h2>Реестр загруженных документов</h2>
+        <div class="doc-list">
+            <div class="doc-item">
+                <span class="doc-icon">📄</span>
+                <p>Удостоверение_личности.pdf</p>
+                <button class="btn-verify">Проверить ЭЦП</button>
+            </div>
+            <div class="doc-item">
+                <span class="doc-icon">📁</span>
+                <p>Заявление_на_пособие.docx</p>
+                <button class="btn-verify">Открыть</button>
+            </div>
+            <div class="doc-item">
+                <span class="doc-icon">🖼️</span>
+                <p>Фото_3х4.jpg</p>
+                <button class="btn-verify">Просмотреть</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
