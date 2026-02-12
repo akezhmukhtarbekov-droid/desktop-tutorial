@@ -1,0 +1,54 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #1a73e8;
+    color: white;
+}
+
+.logo {
+    float : left;
+    height : 150px;
+    width : 350px;
+}
+
+.auth {
+    text-decoration: none;
+    padding: 10px 18px;
+    margin-left: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.login  {
+    background: white;
+    color: #1a73e8;
+}
+
+.regist {
+    background: #0f52ba;
+    color: white;
+}
+.opis {
+    font-family : Arial;
+    font-size : 15px;
+}
+.navig {
+    font-family : Arial;
+    font-size: 17px;
+}
+.text {
+    font-family : Arial;
+    font-size : 16px;
+}
+.login {
+    font-family : Arial;
+    font-size : 25px;
+}
+.regist {
+    font-family : Arial;
+    font-size : 25px;
+}
+
