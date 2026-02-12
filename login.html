@@ -1,19 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<meta charset="utf-8" />
-<title>QoldaU.kz</title>
-<link rel="stylesheet" href="css.css">
+  <meta charset="utf-8" />
+  <title>Qoldau.kz — Вход</title>
+  <link rel="stylesheet" href="css.css">
 </head>
 <body>
-    <div class="auth-container">
-  <form class="auth-form">
-    <h2>Вход</h2>
-    <input type="IIN" placeholder="ИИН" required>
-    <input type="password" placeholder="Пароль" required>
-    <button type="submit">Войти</button>
-    <p class="toggle-text">Нет аккаунта? <a href="registration.html">Зарегистрироваться</a></p>
-  </form>
-</div>
+
+  <div class="auth-container">
+    <form id="loginForm" class="auth-form">
+      <h2>Вход</h2>
+
+      <!-- ИИН -->
+      <input 
+        type="text" 
+        id="iin" 
+        placeholder="ИИН" 
+        required
+      >
+
+      <!-- Пароль -->
+      <input 
+        type="password" 
+        id="password" 
+        placeholder="Пароль" 
+        required
+      >
+
+      <!-- Ошибка -->
+      <p id="error" style="color: red; height: 20px;"></p>
+
+      <!-- Кнопка -->
+      <button type="submit">Войти</button>
+
+      <p class="toggle-text">
+        Нет аккаунта? 
+        <a href="registration.html">Зарегистрироваться</a>
+      </p>
+    </form>
+  </div>
+
+  <!-- Подключаем JS -->
+  <script src="login.js"></script>
 
 </body>
+</html>

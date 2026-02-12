@@ -1,30 +1,409 @@
-<!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<meta charset="utf-8" />
-<title>QoldaU.kz</title>
-<link rel="stylesheet" href="css.css">
+  <meta charset="utf-8" />
+  <title>Qoldau.kz — Регистрация</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a5d6a7 0%, #81c784 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .auth-container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      max-width: 450px;
+      width: 100%;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo-text {
+      text-align: center;
+      font-size: 32px;
+      color: #2e7d32;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.3s;
+      background: #f5f5f5;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #66bb6a;
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 187, 106, 0.2);
+    }
+
+    input::placeholder {
+      color: #999;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      font-weight: normal;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 187, 106, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .toggle-text {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+    }
+
+    .toggle-text a {
+      color: #43a047;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .toggle-text a:hover {
+      color: #2e7d32;
+      text-decoration: underline;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .input-hint {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .input-hint.show {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <div class="auth-container">
-  <form class="auth-form">
+  <div class="auth-container">
+    <div class="logo-text">QOLDAU</div>
     <h2>Регистрация</h2>
-    
-    <input type="text" placeholder="ФИО" required>
-    <input type="IIN" placeholder="ИИН" required>
-    
-    <div class="password-group">
-      <input type="password" placeholder="Пароль" required>
-      <input type="password" placeholder="Повторите пароль" required>
-    </div>
-    
-    <label class="checkbox-label">
-      <input type="checkbox" required> Я согласен с условиями
-    </label>
-    
-    <button type="submit">Создать аккаунт</button>
-    <p class="toggle-text">Уже есть профиль? <a href="login.html">Войти</a></p>
-  </form>
-</div>
+
+    <div id="message" class="message"></div>
+
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="fullName">ФИО *</label>
+        <input 
+          type="text" 
+          id="fullName" 
+          placeholder="Иванов Иван Иванович" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="iin">ИИН *</label>
+        <input 
+          type="text" 
+          id="iin" 
+          placeholder="123456789012" 
+          maxlength="12"
+          required
+        >
+        <div id="iinHint" class="input-hint">ИИН должен содержать 12 цифр</div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Телефон</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          placeholder="+7 (700) 123-45-67"
+        >
+        
+      </div>
+
+      <div class="form-group">
+        <label for="password">Пароль *</label>
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="Минимум 6 символов" 
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Подтвердите пароль *</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          placeholder="Повторите пароль" 
+          required
+        >
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="agree" required>
+        <label for="agree">Я согласен с условиями использования</label>
+      </div>
+
+      <button type="submit" id="submitBtn">
+        Создать аккаунт
+      </button>
+
+      <p class="toggle-text">
+        Уже есть профиль? 
+        <a href="login.html">Войти</a>
+      </p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const messageDiv = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
+    const iinInput = document.getElementById('iin');
+    const iinHint = document.getElementById('iinHint');
+
+    // Валидация ИИН
+    function validateIIN(iin) {
+      if (!/^\d{12}$/.test(iin)) return false;
+
+      const digits = iin.split("").map(Number);
+      const k1 = [1,2,3,4,5,6,7,8,9,10,11];
+      const k2 = [3,4,5,6,7,8,9,10,11,1,2];
+
+      let sum = 0;
+      for (let i = 0; i < 11; i++) {
+        sum += digits[i] * k1[i];
+      }
+
+      let control = sum % 11;
+
+      if (control === 10) {
+        sum = 0;
+        for (let i = 0; i < 11; i++) {
+          sum += digits[i] * k2[i];
+        }
+        control = sum % 11;
+      }
+
+      return control === digits[11];
+    }
+
+    // Показать подсказку для ИИН
+    iinInput.addEventListener('input', () => {
+      if (iinInput.value.length > 0 && iinInput.value.length < 12) {
+        iinHint.classList.add('show');
+      } else {
+        iinHint.classList.remove('show');
+      }
+    });
+
+    // Показать сообщение
+    function showMessage(text, type) {
+      messageDiv.textContent = text;
+      messageDiv.className = `message ${type}`;
+      messageDiv.style.display = 'block';
+      
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    // Отправка формы
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const iin = iinInput.value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Валидация
+      if (!fullName || !iin || !password) {
+        showMessage('Заполните все обязательные поля', 'error');
+        return;
+      }
+
+      if (!validateIIN(iin)) {
+        showMessage('Некорректный ИИН', 'error');
+        return;
+      }
+
+      if (password.length < 6) {
+        showMessage('Пароль должен быть минимум 6 символов', 'error');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showMessage('Пароли не совпадают', 'error');
+        return;
+      }
+
+      // Отправка на сервер
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading"></span> Регистрация...';
+
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            iin,
+            password,
+            full_name: fullName,
+            phone
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          showMessage('✅ Регистрация успешна! Перенаправление...', 'success');
+          
+          // Сохраняем пользователя в localStorage
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Перенаправляем на главную через 2 секунды
+          setTimeout(() => {
+            window.location.href = 'HTMLPage1.html';
+          }, 2000);
+        } else {
+          showMessage('❌ ' + data.message, 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Создать аккаунт';
+        }
+      } catch (error) {
+        console.error(error);
+        showMessage('❌ Ошибка подключения к серверу', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Создать аккаунт';
+      }
+    });
+  </script>
 
 </body>
+</html>

@@ -2,10 +2,10 @@
   "name": "desktop-tutorial",
   "version": "1.0.0",
   "description": "This is your READMoE. READMEs are where you can communicate what your project is and how to use it.",
-"main": "index.js",
-"scripts": {
-  "start": "node server.js"
-},
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akezhmukhtarbekov-droid/desktop-tutorial.git"
@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/akezhmukhtarbekov-droid/desktop-tutorial#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "pg": "^8.18.0"
   }
 }
