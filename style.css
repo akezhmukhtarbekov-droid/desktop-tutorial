@@ -469,3 +469,8 @@ body {
 }
 
 .close:hover { color: #000; }
+
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; }
+.form-group input { padding: 8px; width: 100%; max-width: 300px; }
+.btn-save { background-color: #2ecc71; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }

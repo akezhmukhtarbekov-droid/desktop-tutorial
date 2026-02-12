@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Обращения - QoldaU.kz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-left">
+        <img src="images/logot.jpg" alt="Логотип" class="logo">
+        <div class="site-info">
+            <p class="slogan">Государственные услуги</p>
+            <p class="contacts">Тел.: 8 (700) 123-45-67 | Email: info@qoldau.kz</p>
+        </div>
+    </div>
+    <div class="auth">
+        <a href="login.html" class="btn login">Войти</a>
+        <a href="registration.html" class="btn regist">Регистрация</a>
+    </div>
+</header>
+
+<div class="adm-layout">
+    <nav class="adm-sidebar">
+        <ul>
+            <li><a href="adm-requests.html"><span>📄</span> Обращения</a></li>
+            <li><a href="adm-docs.html"><span>📁</span> Документы</a></li>
+            <li><a href="adm-schedule.html"><span>📅</span> Расписание</a></li>
+            <li><a href="adm-stats.html"><span>📊</span> Статистика</a></li>
+            <li><a href="adm-settings.html"><span>⚙️</span> Настройки</a></li>
+            <li><a href="adm-users.html"><span>👥</span> Сотрудники</a></li>
+        </ul>
+    </nav>
+
+    <main class="adm-content">
+        <h2 class="adm-title">Список обращений</h2>
+        <div class="task-block">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #dcedc8;">
+                        <th style="text-align: left; padding: 10px;">ID</th>
+                        <th style="text-align: left; padding: 10px;">Заявитель</th>
+                        <th style="text-align: left; padding: 10px;">Статус</th>
+                        <th style="text-align: left; padding: 10px;">Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px;">#101</td>
+                        <td style="padding: 10px;">Иванов А.</td>
+                        <td style="padding: 10px; color: orange;">В обработке</td>
+                        <td style="padding: 10px;"><button class="btn login">Открыть</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+</body>
+</html>
