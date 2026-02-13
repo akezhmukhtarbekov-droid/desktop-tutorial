@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qamqor.ai - Городская система управления</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <h1 class="logo">Qamqor.ai</h1>
+            <p class="logo-subtitle">Городская система управления</p>
+        </div>
+        <div class="auth">
+            <a href="login.html" class="login">Войти</a>
+            <a href="registration.html" class="regist">Регистрация</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero">
+            <h2 class="text">Qamqor.ai — система управления городским хозяйством</h2>
+            <p class="subtitle">
+                Сообщите о проблеме в вашем городе — мы оперативно решим её.<br>
+                Прозрачность на каждом этапе, от подачи заявки до выполнения работ.
+            </p>
+            <p class="features">
+                🎤 Можно описать проблему текстом или голосом<br>
+                📸 Прикрепите фото проблемы<br>
+                📍 Автоматическое определение геолокации<br>
+                ✅ Отслеживайте статус в реальном времени
+            </p>
+            <p class="cta-text">Что вы хотите сделать?</p>
+        </section>
+
+        <section class="services">
+            <a href="complaint.html" class="navig">
+                <span class="icon">🕳️</span>
+                <div class="navig-content">
+                    <h3>Сообщить о яме на дороге</h3>
+                    <p class="opis">Мы отправим ремонтную бригаду</p>
+                </div>
+            </a>
+
+            <a href="complaint.html?type=trash" class="navig">
+                <span class="icon">🗑️</span>
+                <div class="navig-content">
+                    <h3>Проблема с мусором</h3>
+                    <p class="opis">Переполненные контейнеры, свалки</p>
+                </div>
+            </a>
+
+            <a href="complaint.html?type=light" class="navig">
+                <span class="icon">💡</span>
+                <div class="navig-content">
+                    <h3>Не работает освещение</h3>
+                    <p class="opis">Сломанные фонари, тёмные улицы</p>
+                </div>
+            </a>
+
+            <a href="complaint.html?type=water" class="navig">
+                <span class="icon">💧</span>
+                <div class="navig-content">
+                    <h3>Проблемы с водоснабжением</h3>
+                    <p class="opis">Прорывы труб, отсутствие воды</p>
+                </div>
+            </a>
+
+            <a href="complaint.html?type=heating" class="navig">
+                <span class="icon">🔥</span>
+                <div class="navig-content">
+                    <h3>Отопление не работает</h3>
+                    <p class="opis">Холодные батареи, прорывы</p>
+                </div>
+            </a>
+
+            <a href="complaint.html?type=other" class="navig">
+                <span class="icon">📝</span>
+                <div class="navig-content">
+                    <h3>Другая проблема</h3>
+                    <p class="opis">Опишите любую городскую проблему</p>
+                </div>
+            </a>
+
+            <a href="tracking.html" class="navig track">
+                <span class="icon">📊</span>
+                <div class="navig-content">
+                    <h3>Мои заявки</h3>
+                    <p class="opis">Отслеживайте статус ваших обращений</p>
+                </div>
+            </a>
+        </section>
+
+        <section class="info">
+            <h3>Как это работает?</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p>Вы сообщаете о проблеме с фото и адресом</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p>Система назначает ответственную бригаду</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p>Работники выполняют ремонт и загружают фото</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <p>Вы получаете уведомление о выполнении</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Qamqor.ai | Hackathon Project</p>
+        <p>Единая цифровая экосистема управления городским хозяйством</p>
+    </footer>
+
+    <!-- AI Chat Assistant -->
+    <button class="chat-button" onclick="toggleChat()">
+        <span class="chat-button-icon">💬</span>
+    </button>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <h3>🤖 AI Помощник</h3>
+            <button class="chat-close" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot">
+                <div class="message-bubble">
+                    Здравствуйте! Я AI-помощник Qamqor.ai 👋<br><br>
+                    Я помогу вам с:<br>
+                    • Подачей жалобы на городские проблемы<br>
+                    • Отслеживанием статуса заявки<br>
+                    • Навигацией по системе<br><br>
+                    Чем могу помочь?
+                </div>
+            </div>
+        </div>
+        <div class="typing-indicator" id="typingIndicator">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Напишите ваш вопрос..." onkeypress="handleChatKeyPress(event)">
+            <button class="chat-send" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.toggle('active');
+            if (widget.classList.contains('active')) {
+                document.getElementById('chatInput').focus();
+            }
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Добавляем сообщение пользователя
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Показываем индикатор печати
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.classList.add('active');
+
+            // Простой чат-бот с ответами
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                typingIndicator.classList.remove('active');
+                addMessage(response, 'bot');
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.innerHTML = text;
+            
+            messageDiv.appendChild(bubble);
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('жалоб') || lowerMessage.includes('проблем') || lowerMessage.includes('яма') || lowerMessage.includes('мусор')) {
+                return 'Для подачи жалобы:<br><br>1. Нажмите на категорию проблемы на главной странице<br>2. Загрузите фото проблемы<br>3. Укажите адрес<br>4. Нажмите "Определить моё местоположение" для геолокации<br>5. Отправьте жалобу<br><br>Вы сможете отслеживать статус в личном кабинете!';
+            } else if (lowerMessage.includes('статус') || lowerMessage.includes('отслед') || lowerMessage.includes('заявк')) {
+                return 'Для отслеживания статуса заявки:<br><br>1. Войдите в систему<br>2. Перейдите в раздел "Мои заявки"<br>3. Вы увидите все ваши обращения и их статусы:<br>   • Принято<br>   • В работе<br>   • Выполнено<br><br>При статусе "Выполнено" вы сможете посмотреть фото и отчёт о работе!';
+            } else if (lowerMessage.includes('регистр') || lowerMessage.includes('аккаунт')) {
+                return 'Для регистрации:<br><br>1. Нажмите кнопку "Регистрация" в верхнем правом углу<br>2. Заполните форму:<br>   • ИИН (12 цифр)<br>   • ФИО<br>   • Телефон<br>   • Пароль<br>3. Подтвердите пароль<br>4. Нажмите "Зарегистрироваться"<br><br>После этого вы сможете войти в систему!';
+            } else if (lowerMessage.includes('вход') || lowerMessage.includes('войти')) {
+                return 'Для входа в систему:<br><br>1. Нажмите кнопку "Войти"<br>2. Введите ваш ИИН (12 цифр)<br>3. Введите пароль<br>4. Нажмите "Войти"<br><br>Система автоматически перенаправит вас в нужный раздел в зависимости от вашей роли.';
+            } else if (lowerMessage.includes('привет') || lowerMessage.includes('здравств')) {
+                return 'Привет! 👋 Я рад помочь вам! Вы можете спросить меня про:<br>• Подачу жалобы<br>• Отслеживание статуса<br>• Регистрацию<br>• Вход в систему<br><br>О чём хотите узнать?';
+            } else if (lowerMessage.includes('спасибо') || lowerMessage.includes('благодар')) {
+                return 'Пожалуйста! 😊 Рад был помочь! Если возникнут ещё вопросы - обращайтесь!';
+            } else {
+                return 'Я могу помочь вам с:<br><br>• 📝 Подачей жалобы на городские проблемы<br>• 📊 Отслеживанием статуса заявки<br>• 👤 Регистрацией и входом в систему<br>• 🗺️ Навигацией по сайту<br><br>Задайте ваш вопрос более конкретно, и я постараюсь помочь!';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,47 +1,91 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <title>Qoldau.kz — Вход</title>
-  <link rel="stylesheet" href="css.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Qamqor.ai</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="header">
+        <div class="logo-container">
+            <h1 class="logo">Qamqor.ai</h1>
+            <p class="logo-subtitle">Городская система управления</p>
+        </div>
+        <div class="auth">
+            <a href="index.html" class="login">На главную</a>
+            <a href="registration.html" class="regist">Регистрация</a>
+        </div>
+    </header>
 
-  <div class="auth-container">
-    <form id="loginForm" class="auth-form">
-      <h2>Вход</h2>
+    <div class="form-container">
+        <h2 class="form-title">Вход в систему</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="iin">ИИН</label>
+                <input type="text" id="iin" name="iin" maxlength="12" pattern="[0-9]{12}" required placeholder="Введите ИИН">
+            </div>
 
-      <!-- ИИН -->
-      <input 
-        type="text" 
-        id="iin" 
-        placeholder="ИИН" 
-        required
-      >
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required placeholder="Введите пароль">
+            </div>
 
-      <!-- Пароль -->
-      <input 
-        type="password" 
-        id="password" 
-        placeholder="Пароль" 
-        required
-      >
+            <button type="submit" class="btn">Войти</button>
+        </form>
 
-      <!-- Ошибка -->
-      <p id="error" style="color: red; height: 20px;"></p>
+        <div style="margin-top: 30px; padding: 20px; background: #f7fafc; border-radius: 8px;">
+            <p style="font-size: 14px; color: #4a5568; margin-bottom: 10px; font-weight: 600;">Тестовые аккаунты:</p>
+            <p style="font-size: 13px; color: #718096; margin: 5px 0;">👤 Житель: ИИН <strong>091206551005</strong>, пароль <strong>qwerty123</strong></p>
+            <p style="font-size: 13px; color: #718096; margin: 5px 0;">🔧 Сотрудник: ИИН <strong>990101500123</strong>, пароль <strong>worker123</strong></p>
+            <p style="font-size: 13px; color: #718096; margin: 5px 0;">⚙️ Админ: ИИН <strong>880202600456</strong>, пароль <strong>admin123</strong></p>
+        </div>
 
-      <!-- Кнопка -->
-      <button type="submit">Войти</button>
+        <p style="text-align: center; margin-top: 20px; color: #718096;">
+            Нет аккаунта? <a href="registration.html" style="color: #667eea; text-decoration: none; font-weight: 600;">Зарегистрироваться</a>
+        </p>
+    </div>
 
-      <p class="toggle-text">
-        Нет аккаунта? 
-        <a href="registration.html">Зарегистрироваться</a>
-      </p>
-    </form>
-  </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-  <!-- Подключаем JS -->
-  <script src="login.js"></script>
+            const formData = {
+                iin: document.getElementById('iin').value,
+                password: document.getElementById('password').value
+            };
 
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Сохраняем данные пользователя
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    alert('✅ ' + data.message);
+
+                    // Перенаправление в зависимости от роли
+                    if (data.user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else if (data.user.role === 'worker') {
+                        window.location.href = 'worker.html';
+                    } else {
+                        window.location.href = 'dashboard.html';
+                    }
+                } else {
+                    alert('❌ ' + data.message);
+                }
+            } catch (error) {
+                alert('❌ Ошибка соединения с сервером');
+                console.error(error);
+            }
+        });
+    </script>
 </body>
 </html>

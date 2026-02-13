@@ -1,279 +1,235 @@
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
-});
+const pool = require("./db.js").default || require("./db.js");
+pool.query("SELECT NOW()")
+  .then(res => console.log("📡 Подключение к базе работает:", res.rows[0]))
+  .catch(err => console.error("❌ Ошибка подключения к базе:", err));
 const express = require("express");
 const path = require("path");
-const pool = require("./db");
 const app = express();
+const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
-app.use(express.static(__dirname)); // Раздача статических файлов
+app.use(express.static(__dirname));
+
+// Хранилище данных в памяти
+const users = [
+  { iin: "091206551005", password: "qwerty123", full_name: "Тестовый Житель", phone: "+77001234567", role: "citizen" },
+  { iin: "990101500123", password: "worker123", full_name: "Рабочий Иванов", phone: "+77001111111", role: "worker" },
+  { iin: "880202600456", password: "admin123", full_name: "Администратор Петров", phone: "+77002222222", role: "admin" }
+];
+
+const complaints = [];
+const workReports = [];
+
+let complaintId = 1;
 
 // ========================================
 // АУТЕНТИФИКАЦИЯ
 // ========================================
 
-// Регистрация
-app.post("/api/register", async (req, res) => {
+app.post("/api/register", (req, res) => {
   const { iin, password, full_name, phone } = req.body;
 
   if (!iin || !password || !full_name) {
-    return res.status(400).json({
-      success: false,
-      message: "Заполните все обязательные поля"
-    });
+    return res.status(400).json({ success: false, message: "Заполните все обязательные поля" });
   }
 
-  try {
-    const result = await pool.query(
-      "INSERT INTO users (iin, password, full_name, phone) VALUES ($1, $2, $3, $4) RETURNING *",
-      [iin, password, full_name, phone]
-    );
-
-    res.json({
-      success: true,
-      message: "Регистрация успешна!",
-      user: { iin: result.rows[0].iin, name: result.rows[0].full_name }
-    });
-  } catch (error) {
-    if (error.code === '23505') { // Дубликат ИИН
-      res.status(400).json({
-        success: false,
-        message: "Пользователь с таким ИИН уже существует"
-      });
-    } else {
-      console.error(error);
-      res.status(500).json({
-        success: false,
-        message: "Ошибка сервера"
-      });
-    }
+  const existing = users.find(u => u.iin === iin);
+  if (existing) {
+    return res.status(400).json({ success: false, message: "Пользователь с таким ИИН уже существует" });
   }
+
+  const newUser = { iin, password, full_name, phone, role: "citizen" };
+  users.push(newUser);
+
+  console.log("✅ Пользователь создан:", newUser.full_name);
+
+  res.json({ success: true, message: "Регистрация успешна!", user: { iin: newUser.iin, name: newUser.full_name, role: newUser.role } });
 });
 
-// Вход
-app.post("/api/login", async (req, res) => {
+app.post("/api/login", (req, res) => {
   const { iin, password } = req.body;
 
   if (!iin || !password) {
-    return res.status(400).json({
-      success: false,
-      message: "ИИН и пароль обязательны"
-    });
+    return res.status(400).json({ success: false, message: "ИИН и пароль обязательны" });
   }
 
-  try {
-    const result = await pool.query(
-      "SELECT * FROM users WHERE iin = $1 AND password = $2",
-      [iin, password]
-    );
+  const user = users.find(u => u.iin === iin && u.password === password);
 
-    if (result.rows.length === 0) {
-      return res.status(401).json({
-        success: false,
-        message: "Неверный ИИН или пароль"
-      });
+  if (!user) {
+    return res.status(401).json({ success: false, message: "Неверный ИИН или пароль" });
+  }
+
+  console.log("✅ Вход успешен:", user.full_name);
+
+  res.json({ success: true, message: "Успешный вход", user: { iin: user.iin, name: user.full_name, phone: user.phone, role: user.role } });
+});
+
+// ========================================
+// ЖАЛОБЫ (Модуль Активный Житель)
+// ========================================
+
+app.post("/api/complaints", (req, res) => {
+  const { user_iin, category, description, address, latitude, longitude, photo_before } = req.body;
+
+  if (!user_iin || !category || !description || !address) {
+    return res.status(400).json({ success: false, message: "Заполните все обязательные поля" });
+  }
+
+  const newComplaint = {
+    id: complaintId++,
+    user_iin,
+    category,
+    description,
+    address,
+    latitude: latitude || null,
+    longitude: longitude || null,
+    photo_before: photo_before || null,
+    status: "Принято",
+    assigned_worker: null,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  };
+
+  complaints.push(newComplaint);
+
+  console.log("✅ Жалоба создана #" + newComplaint.id);
+
+  res.json({ success: true, message: "Жалоба успешно отправлена!", data: newComplaint });
+});
+
+// Получить жалобы пользователя
+app.get("/api/complaints/user/:iin", (req, res) => {
+  const { iin } = req.params;
+  const userComplaints = complaints.filter(c => c.user_iin === iin);
+  res.json({ success: true, data: userComplaints });
+});
+
+// Получить все жалобы (для админа/сотрудника)
+app.get("/api/complaints", (req, res) => {
+  res.json({ success: true, data: complaints });
+});
+
+// Получить жалобы для конкретного сотрудника
+app.get("/api/complaints/worker/:iin", (req, res) => {
+  const { iin } = req.params;
+  const workerComplaints = complaints.filter(c => c.assigned_worker === iin);
+  res.json({ success: true, data: workerComplaints });
+});
+
+// ========================================
+// НАЗНАЧЕНИЕ ЗАДАЧ (Модуль Админ)
+// ========================================
+
+app.post("/api/complaints/:id/assign", (req, res) => {
+  const { id } = req.params;
+  const { worker_iin } = req.body;
+
+  const complaint = complaints.find(c => c.id == id);
+
+  if (!complaint) {
+    return res.status(404).json({ success: false, message: "Жалоба не найдена" });
+  }
+
+  complaint.assigned_worker = worker_iin;
+  complaint.status = "В работе";
+  complaint.updated_at = new Date().toISOString();
+
+  console.log(`✅ Жалоба #${id} назначена сотруднику ${worker_iin}`);
+
+  res.json({ success: true, message: "Задача назначена!", data: complaint });
+});
+
+// ========================================
+// ОТЧЁТЫ О РАБОТЕ (Модуль Сотрудник)
+// ========================================
+
+app.post("/api/work-reports", (req, res) => {
+  const { complaint_id, worker_iin, photo_after, work_duration, comment } = req.body;
+
+  if (!complaint_id || !worker_iin || !photo_after) {
+    return res.status(400).json({ success: false, message: "Загрузите фото после работы" });
+  }
+
+  const complaint = complaints.find(c => c.id == complaint_id);
+
+  if (!complaint) {
+    return res.status(404).json({ success: false, message: "Жалоба не найдена" });
+  }
+
+  const newReport = {
+    id: workReports.length + 1,
+    complaint_id,
+    worker_iin,
+    photo_after,
+    work_duration: work_duration || null,
+    comment: comment || "",
+    completed_at: new Date().toISOString()
+  };
+
+  workReports.push(newReport);
+
+  // Обновляем статус жалобы
+  complaint.status = "Выполнено";
+  complaint.updated_at = new Date().toISOString();
+
+  console.log("✅ Отчёт о работе создан для жалобы #" + complaint_id);
+
+  res.json({ success: true, message: "Отчёт отправлен!", data: newReport });
+});
+
+// Получить отчёты
+app.get("/api/work-reports/:complaint_id", (req, res) => {
+  const { complaint_id } = req.params;
+  const reports = workReports.filter(r => r.complaint_id == complaint_id);
+  res.json({ success: true, data: reports });
+});
+
+// ========================================
+// СТАТИСТИКА (Модуль Админ)
+// ========================================
+
+app.get("/api/statistics", (req, res) => {
+  const total = complaints.length;
+  const completed = complaints.filter(c => c.status === "Выполнено").length;
+  const inProgress = complaints.filter(c => c.status === "В работе").length;
+  const pending = complaints.filter(c => c.status === "Принято").length;
+
+  const categoriesCount = {};
+  complaints.forEach(c => {
+    categoriesCount[c.category] = (categoriesCount[c.category] || 0) + 1;
+  });
+
+  res.json({
+    success: true,
+    data: {
+      total,
+      completed,
+      inProgress,
+      pending,
+      categoriesCount
     }
-
-    const user = result.rows[0];
-    res.json({
-      success: true,
-      message: "Успешный вход",
-      user: { 
-        iin: user.iin, 
-        name: user.full_name,
-        phone: user.phone 
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Ошибка сервера"
-    });
-  }
+  });
 });
 
 // ========================================
-// ЗАПИСЬ В БОЛЬНИЦУ
+// ЗАПУСК СЕРВЕРА
 // ========================================
 
-// Создать запись
-app.post("/api/appointments", async (req, res) => {
-  const { user_iin, hospital, department, doctor, appointment_date, appointment_time } = req.body;
-
-  if (!user_iin || !hospital || !appointment_date || !appointment_time) {
-    return res.status(400).json({
-      success: false,
-      message: "Заполните все обязательные поля"
-    });
-  }
-
-  try {
-    const result = await pool.query(
-      `INSERT INTO appointments (user_iin, hospital, department, doctor, appointment_date, appointment_time)
-       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [user_iin, hospital, department, doctor, appointment_date, appointment_time]
-    );
-
-    res.json({
-      success: true,
-      message: "Запись успешно создана!",
-      data: result.rows[0]
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Ошибка при создании записи"
-    });
-  }
-});
-
-// Получить все записи пользователя
-app.get("/api/appointments/:iin", async (req, res) => {
-  const { iin } = req.params;
-
-  try {
-    const result = await pool.query(
-      "SELECT * FROM appointments WHERE user_iin = $1 ORDER BY created_at DESC",
-      [iin]
-    );
-
-    res.json({
-      success: true,
-      data: result.rows
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Ошибка получения записей"
-    });
-  }
-});
-
-// ========================================
-// ВОССТАНОВЛЕНИЕ ДОКУМЕНТОВ
-// ========================================
-
-// Создать заявку на документ
-app.post("/api/document-requests", async (req, res) => {
-  const { user_iin, document_type, reason } = req.body;
-
-  if (!user_iin || !document_type) {
-    return res.status(400).json({
-      success: false,
-      message: "Укажите тип документа"
-    });
-  }
-
-  try {
-    // Генерируем номер заявки
-    const request_number = `DOC-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-
-    const result = await pool.query(
-      `INSERT INTO document_requests (user_iin, document_type, reason, request_number)
-       VALUES ($1, $2, $3, $4) RETURNING *`,
-      [user_iin, document_type, reason, request_number]
-    );
-
-    res.json({
-      success: true,
-      message: "Заявка принята!",
-      data: result.rows[0]
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Ошибка при создании заявки"
-    });
-  }
-});
-
-// Получить заявки пользователя
-app.get("/api/document-requests/:iin", async (req, res) => {
-  const { iin } = req.params;
-
-  try {
-    const result = await pool.query(
-      "SELECT * FROM document_requests WHERE user_iin = $1 ORDER BY created_at DESC",
-      [iin]
-    );
-
-    res.json({
-      success: true,
-      data: result.rows
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Ошибка получения заявок"
-    });
-  }
-});
-
-// ========================================
-// СПРАВКИ
-// ========================================
-
-// Запросить справку
-app.post("/api/certificates", async (req, res) => {
-  const { user_iin, certificate_type } = req.body;
-
-  if (!user_iin || !certificate_type) {
-    return res.status(400).json({
-      success: false,
-      message: "Укажите тип справки"
-    });
-  }
-
-  try {
-    const request_number = `CERT-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-
-    const result = await pool.query(
-      `INSERT INTO certificate_requests (user_iin, certificate_type, request_number)
-       VALUES ($1, $2, $3) RETURNING *`,
-      [user_iin, certificate_type, request_number]
-    );
-
-    res.json({
-      success: true,
-      message: "Заявка на справку принята!",
-      data: result.rows[0]
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Ошибка при создании заявки"
-    });
-  }
-});
-
-// Получить справки пользователя
-app.get("/api/certificates/:iin", async (req, res) => {
-  const { iin } = req.params;
-
-  try {
-    const result = await pool.query(
-      "SELECT * FROM certificate_requests WHERE user_iin = $1 ORDER BY created_at DESC",
-      [iin]
-    );
-
-    res.json({
-      success: true,
-      data: result.rows
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Ошибка получения справок"
-    });
-  }
+app.listen(PORT, () => {
+  console.log("=".repeat(60));
+  console.log("🚀 ГОРОДСКАЯ СИСТЕМА УПРАВЛЕНИЯ ЗАПУЩЕНА!");
+  console.log("=".repeat(60));
+  console.log(`📍 URL: http://localhost:${PORT}`);
+  console.log();
+  console.log("✅ Данные хранятся в памяти");
+  console.log(`✅ Зарегистрировано пользователей: ${users.length}`);
+  console.log();
+  console.log("🔑 Тестовые аккаунты:");
+  console.log("   Житель: ИИН 091206551005, пароль qwerty123");
+  console.log("   Сотрудник: ИИН 990101500123, пароль worker123");
+  console.log("   Админ: ИИН 880202600456, пароль admin123");
+  console.log();
+  console.log("📖 Откройте в браузере:");
+  console.log(`   http://localhost:${PORT}/index.html`);
+  console.log("=".repeat(60));
 });
