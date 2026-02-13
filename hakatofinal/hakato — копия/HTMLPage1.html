@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>QoldaU.kz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-left">
+        <img src="images/logot.jpg" alt="Логотип" class="logo">
+        <div class="role-switch">
+    <a href="Osnova.html" class="role-btn citizen">Я гражданин</a>
+    <a href="Sotrudnik.html" class="role-btn worker">Я сотрудник</a>
+    <a href="Administration.html" class="role-btn admin">Я администратор</a>
+         </div>
+        <div class="site-info">
+            <p class="slogan">Государственные услуги</p>
+            <p class="contacts">Тел.: 8 (700) 123-45-67 | Email: info@qamqor.ai</p>
+        </div>
+    </div>
+    <div class="gamification">
+
+    <div class="coins-box">
+        <span class="coin-icon">🪙</span>
+        <span id="coinCount">0</span>
+        <span class="coin-text">баллов</span>
+    </div>
+
+    <button class="reward-btn" onclick="earnCoins()">
+        Получить награду
+    </button>
+
+    <a href="pluski.html" class="shop-btn">Плюшки</a>
+
+</div>
+    <div class="region-select">
+    <label for="region">Ваш регион:</label>
+    <select id="region">
+        <option>Выберите регион</option>
+
+        <optgroup label="Города республиканского значения">
+            <option>Астана</option>
+            <option>Алматы</option>
+            <option>Шымкент</option>
+        </optgroup>
+
+        <optgroup label="Области">
+            <option>Абайская область</option>
+            <option>Акмолинская область</option>
+            <option>Актюбинская область</option>
+            <option>Алматинская область</option>
+            <option>Атырауская область</option>
+            <option>Восточно-Казахстанская область</option>
+            <option>Жамбылская область</option>
+            <option>Жетысуская область</option>
+            <option>Западно-Казахстанская область</option>
+            <option>Карагандинская область</option>
+            <option>Костанайская область</option>
+            <option>Кызылординская область</option>
+            <option>Мангистауская область</option>
+            <option>Павлодарская область</option>
+            <option>Северо-Казахстанская область</option>
+            <option>Туркестанская область</option>
+            <option>Улытауская область</option>
+        </optgroup>
+    </select>
+</div>
+    <div class="auth">
+        <a href="login.html" class="btn login">Войти</a>
+        <a href="registration.html" class="btn regist">Регистрация</a>
+    </div>
+</header>
+<div class = "inf">
+<p1 class="text">Qoldau — это онлайн-платформа для пожилых людей, где они могут не только узнать информацию, но и сразу получить необходимые услуги.
+На сайте пользователи могут оплатить налоги, записаться на приём в больницу, подать заявку в ЦОН, оформить пособия и льготы, получить справки, а также восстановить или оформить документы — всё это в одном месте, без лишних очередей и сложностей.
+</p1>
+</div>
+<div class="blocks-container">
+    <a href="spravka.html" class="info-block">
+        <h3>Получить справку</h3>
+        <p>Например: о прописке, пенсии, имуществе</p>
+    </a>
+
+    <a href="straf.html" class="info-block">
+        <h3>Оплатить штраф или налог</h3>
+        <p>Покажем сумму и поможем оплатить</p>
+    </a>
+
+    <a href="zapis.html" class="info-block">
+        <h3>Записаться в больницу или ЦОН</h3>
+        <p>Подберём ближайшее время</p>
+    </a>
+
+    <a href="posob.html" class="info-block">
+        <h3>Оформить пособие или льготу</h3>
+        <p>Пошагово объясним без сложных терминов</p>
+    </a>
+
+    <a href="docs.html" class="info-block">
+        <h3>Восстановить документы</h3>
+        <p>Паспорт, ИИН, водительское удостоверение</p>
+    </a>
+</div>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10933902.949958554!2d66.90431145!3d48.00579020000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38a91007ecfca947%3A0x5f7b842fe4b30e1b!2z0JrQsNC30LDRhdGB0YLQsNC9!5e0!3m2!1sru!2skz!4v1770966099577!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</div>      
+<div class="AI">
+<footer class="site-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Qamqor.ai. Все права защищены.</p>
+        <div class="footer-links">
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Контакты</a>
+            <a href="#">Помощь</a>
+        </div>
+    </div>
+</footer>
+<script src="Coins.js"></script>
+<div style="position:fixed;bottom:20px;right:20px;z-index:9999">
+  <button onclick="toggleChat()" style="width:60px;height:60px;border-radius:50%;background:#4CAF50;color:white;border:none;font-size:28px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition:transform 0.3s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</button>
+  
+  <div id="chatBox" style="display:none;width:350px;height:500px;background:white;border-radius:15px;box-shadow:0 8px 24px rgba(0,0,0,0.3);position:absolute;bottom:80px;right:0">
+    <div style="background:#4CAF50;color:white;padding:15px;border-radius:15px 15px 0 0;display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0">🤖 Помощник Qamqor</h3>
+      <button onclick="toggleChat()" style="background:transparent;border:none;color:white;font-size:20px;cursor:pointer">✕</button>
+    </div>
+    
+    <div id="chatMessages" style="height:370px;overflow-y:auto;padding:15px;background:#f7fafc"></div>
+    
+    <div style="border-top:1px solid #eee;padding:10px;background:white;border-radius:0 0 15px 15px">
+      <input id="chatInput" placeholder="Задайте вопрос..." style="width:calc(100% - 60px);padding:10px;border:2px solid #e2e8f0;border-radius:8px;outline:none" onkeypress="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()" style="width:50px;height:40px;background:#4CAF50;color:white;border:none;border-radius:8px;margin-left:5px;cursor:pointer;font-size:18px">➤</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleChat() {
+  const box = document.getElementById('chatBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  if (box.style.display === 'block') {
+    document.getElementById('chatInput').focus();
+  }
+}
+
+function sendMsg() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  
+  const chat = document.getElementById('chatMessages');
+  
+ 
+  chat.innerHTML += `
+    <div style="text-align:right;margin-bottom:12px;animation:slideIn 0.3s">
+      <span style="background:#667eea;color:white;padding:10px 15px;border-radius:18px 18px 4px 18px;display:inline-block;max-width:80%;word-wrap:break-word;box-shadow:0 2px 4px rgba(0,0,0,0.1)">${msg}</span>
+    </div>`;
+  input.value = '';
+  chat.scrollTop = chat.scrollHeight;
+  
+
+  const typingId = 'typing' + Date.now();
+  chat.innerHTML += `<div id="${typingId}" style="margin-bottom:12px"><span style="background:#e2e8f0;padding:10px 15px;border-radius:18px;display:inline-block">💭 Печатаю...</span></div>`;
+  chat.scrollTop = chat.scrollHeight;
+  
+  
+  setTimeout(() => {
+    document.getElementById(typingId).remove();
+    
+    let response = '';
+    const lowerMsg = msg.toLowerCase();
+    
+   
+    if (lowerMsg.includes('жалоб') || lowerMsg.includes('проблем') || lowerMsg.includes('сообщ')) {
+      response = '📝 Чтобы подать жалобу:<br>1. Нажмите кнопку с нужной категорией (яма, мусор, свет и т.д.)<br>2. Заполните форму с описанием<br>3. Добавьте фото и адрес<br>4. Отправьте! Мы сразу получим вашу заявку.';
+    } else if (lowerMsg.includes('статус') || lowerMsg.includes('отслед') || lowerMsg.includes('проверить')) {
+      response = '🔍 Чтобы проверить статус жалобы:<br>1. Войдите в свой аккаунт<br>2. Перейдите в "Мои заявки"<br>3. Увидите все свои жалобы и их статусы:<br>• Принято<br>• В работе<br>• Выполнено';
+    } else if (lowerMsg.includes('регистр') || lowerMsg.includes('аккаунт') || lowerMsg.includes('зарег')) {
+      response = '👤 Регистрация очень простая:<br>1. Нажмите "Регистрация" в правом верхнем углу<br>2. Введите ИИН (12 цифр)<br>3. Придумайте пароль<br>4. Готово! Теперь можете подавать жалобы.';
+    } else if (lowerMsg.includes('сколько') || lowerMsg.includes('время') || lowerMsg.includes('долго')) {
+      response = '⏱️ Время решения зависит от категории:<br>• Освещение: 1-2 дня<br>• Дороги: 3-7 дней<br>• Мусор: 1 день<br>• Вода/отопление: срочно, в течение дня<br><br>Вы всегда можете отслеживать прогресс!';
+    } else if (lowerMsg.includes('контакт') || lowerMsg.includes('телефон') || lowerMsg.includes('связ')) {
+      response = '📞 Наши контакты:<br>• Телефон горячей линии: +7 700 123 45 67<br>• Email: support@qamqor.ai<br>• Работаем круглосуточно!<br><br>Но лучше подайте жалобу через сайт - так быстрее!';
+    } else if (lowerMsg.includes('работа') || lowerMsg.includes('как это')) {
+      response = '⚙️ Как это работает:<br>1. 📝 Вы подаёте жалобу с фото и адресом<br>2. 👔 Администратор видит её и назначает сотрудника<br>3. 🔧 Сотрудник выполняет работу и загружает фото "после"<br>4. ✅ Вы получаете уведомление о выполнении!';
+    } else if (lowerMsg.includes('бесплат') || lowerMsg.includes('плат') || lowerMsg.includes('деньг')) {
+      response = '💰 Все услуги БЕСПЛАТНЫЕ! Это городская система, финансируется из бюджета. Вы просто сообщаете о проблеме - мы её решаем. Никаких оплат!';
+    } else if (lowerMsg.includes('фото') || lowerMsg.includes('снимок') || lowerMsg.includes('картинк')) {
+      response = '📸 Фото очень важно!<br>• Помогает нам понять проблему<br>• Ускоряет решение<br>• Можно прикрепить при подаче жалобы<br><br>Сфотографируйте проблему, чтобы сотрудники видели что именно нужно исправить.';
+    } else if (lowerMsg.includes('привет') || lowerMsg.includes('здравств') || lowerMsg.includes('добр')) {
+      response = '👋 Здравствуйте! Я ваш виртуальный помощник Qamqor.ai<br><br>Я помогу вам:<br>• Подать жалобу на проблему в городе<br>• Проверить статус заявки<br>• Узнать как всё работает<br><br>Задавайте любые вопросы!';
+    } else if (lowerMsg.includes('спасибо') || lowerMsg.includes('благодар')) {
+      response = '😊 Пожалуйста! Рад помочь! Если будут ещё вопросы - обращайтесь. Хорошего дня!';
+    } else {
+      response = '🤔 Извините, не совсем понял ваш вопрос.<br><br>Я могу помочь с:<br>• Подачей жалобы<br>• Проверкой статуса<br>• Регистрацией<br>• Объяснить как всё работает<br><br>Попробуйте переформулировать вопрос!';
+    }
+    
+    chat.innerHTML += `
+      <div style="margin-bottom:12px;animation:slideIn 0.3s">
+        <span style="background:#f0f4f8;padding:10px 15px;border-radius:18px 18px 18px 4px;display:inline-block;max-width:80%;word-wrap:break-word;box-shadow:0 2px 4px rgba(0,0,0,0.05)">${response}</span>
+      </div>`;
+    chat.scrollTop = chat.scrollHeight;
+  }, 1000);
+}
+
+
+let chatOpened = false;
+const originalToggle = toggleChat;
+toggleChat = function() {
+  originalToggle();
+  if (!chatOpened && document.getElementById('chatBox').style.display === 'block') {
+    chatOpened = true;
+    setTimeout(() => {
+      const chat = document.getElementById('chatMessages');
+      chat.innerHTML = `
+        <div style="margin-bottom:12px;animation:slideIn 0.3s">
+          <span style="background:#f0f4f8;padding:10px 15px;border-radius:18px 18px 18px 4px;display:inline-block;max-width:80%">
+            👋 Здравствуйте! Я виртуальный помощник Qamqor.ai<br><br>
+            Чем могу помочь?<br>
+            • Подать жалобу<br>
+            • Проверить статус<br>
+            • Узнать как работает система
+          </span>
+        </div>`;
+    }, 300);
+  }
+}
+
+
+const style = document.createElement('style');
+style.textContent = '@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}';
+document.head.appendChild(style);
+</script>
+</body>
+</html>

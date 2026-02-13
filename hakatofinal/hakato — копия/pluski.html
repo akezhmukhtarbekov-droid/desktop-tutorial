@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>QoldaU | Тарифы и услуги</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="images/logot.jpg" alt="Логотип" class="logo">
+        <div class="role-switch">
+    <a href="Osnova.html" class="role-btn citizen">Я гражданин</a>
+    <a href="Sotrudnik.html" class="role-btn worker">Я сотрудник</a>
+    <a href="Administration.html" class="role-btn admin">Я администратор</a>
+         </div>
+        <div class="site-info">
+            <p class="slogan">Государственные услуги</p>
+            <p class="contacts">Тел.: 8 (700) 123-45-67 | Email: info@qamqor.ai</p>
+        </div>
+    </div>
+    <div class="gamification">
+
+    <div class="coins-box">
+        <span class="coin-icon">🪙</span>
+        <span id="coinCount">0</span>
+        <span class="coin-text">баллов</span>
+    </div>
+
+    <button class="reward-btn" onclick="earnCoins()">
+        Получить награду
+    </button>
+
+    <a href="pluski.html" class="shop-btn">Плюшки</a>
+
+</div>
+    <div class="region-select">
+    <label for="region">Ваш регион:</label>
+    <select id="region">
+        <option>Выберите регион</option>
+
+        <optgroup label="Города республиканского значения">
+            <option>Астана</option>
+            <option>Алматы</option>
+            <option>Шымкент</option>
+        </optgroup>
+
+        <optgroup label="Области">
+            <option>Абайская область</option>
+            <option>Акмолинская область</option>
+            <option>Актюбинская область</option>
+            <option>Алматинская область</option>
+            <option>Атырауская область</option>
+            <option>Восточно-Казахстанская область</option>
+            <option>Жамбылская область</option>
+            <option>Жетысуская область</option>
+            <option>Западно-Казахстанская область</option>
+            <option>Карагандинская область</option>
+            <option>Костанайская область</option>
+            <option>Кызылординская область</option>
+            <option>Мангистауская область</option>
+            <option>Павлодарская область</option>
+            <option>Северо-Казахстанская область</option>
+            <option>Туркестанская область</option>
+            <option>Улытауская область</option>
+        </optgroup>
+    </select>
+</div>
+    <div class="auth">
+        <a href="login.html" class="btn login">Войти</a>
+        <a href="registration.html" class="btn regist">Регистрация</a>
+    </div>
+</header>
+
+<section class="qld-pricing-hero">
+    <h1>Пакеты помощи</h1>
+    <p>Выбирайте удобный формат поддержки в цифровых госуслугах</p>
+</section>
+
+<section class="qld-pricing-container">
+
+    <div class="qld-pricing-card">
+        <h2>Базовая помощь</h2>
+        <p class="qld-pricing-price">100 🪙</p>
+        <ul>
+            <li>Консультация по одной услуге</li>
+            <li>Помощь в регистрации</li>
+            <li>Пошаговая инструкция</li>
+        </ul>
+        <button class="qld-pricing-btn">Заказать</button>
+    </div>
+
+    <div class="qld-pricing-card qld-pricing-popular">
+        <div class="qld-pricing-badge">Популярно</div>
+        <h2>Стандарт</h2>
+        <p class="qld-pricing-price">300 🪙</p>
+        <ul>
+            <li>Полное сопровождение</li>
+            <li>Помощь в подаче заявления</li>
+            <li>Поддержка по телефону</li>
+            <li>До 2 услуг</li>
+        </ul>
+        <button class="qld-pricing-btn">Выбрать</button>
+    </div>
+
+    <div class="qld-pricing-card">
+        <h2>Премиум</h2>
+        <p class="qld-pricing-price">700 🪙</p>
+        <ul>
+            <li>Неограниченные консультации</li>
+            <li>Личный помощник</li>
+            <li>Приоритетная поддержка</li>
+            <li>Удалённая помощь</li>
+        </ul>
+        <button class="qld-pricing-btn">Подключить</button>
+    </div>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Qamqor.ai. Все права защищены.</p>
+        <div class="footer-links">
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Контакты</a>
+            <a href="#">Помощь</a>
+        </div>
+    </div>
+</footer>
+<script src="Coins.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Пособия и льготы - QoldaU.kz</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header class="header">
+    <div class="header-left">
+        <img src="images/logot.jpg" alt="Логотип" class="logo">
+        <div class="role-switch">
+    <a href="Osnova.html" class="role-btn citizen">Я гражданин</a>
+    <a href="Sotrudnik.html" class="role-btn worker">Я сотрудник</a>
+    <a href="Administration.html" class="role-btn admin">Я администратор</a>
+         </div>
+        <div class="site-info">
+            <p class="slogan">Государственные услуги</p>
+            <p class="contacts">Тел.: 8 (700) 123-45-67 | Email: info@qamqor.ai</p>
+        </div>
+    </div>
+    <div class="gamification">
+
+    <div class="coins-box">
+        <span class="coin-icon">🪙</span>
+        <span id="coinCount">0</span>
+        <span class="coin-text">баллов</span>
+    </div>
+
+    <button class="reward-btn" onclick="earnCoins()">
+        Получить награду
+    </button>
+
+    <a href="rewards.html" class="shop-btn">Плюшки</a>
+
+</div>
+    <div class="region-select">
+    <label for="region">Ваш регион:</label>
+    <select id="region">
+        <option>Выберите регион</option>
+
+        <optgroup label="Города республиканского значения">
+            <option>Астана</option>
+            <option>Алматы</option>
+            <option>Шымкент</option>
+        </optgroup>
+
+        <optgroup label="Области">
+            <option>Абайская область</option>
+            <option>Акмолинская область</option>
+            <option>Актюбинская область</option>
+            <option>Алматинская область</option>
+            <option>Атырауская область</option>
+            <option>Восточно-Казахстанская область</option>
+            <option>Жамбылская область</option>
+            <option>Жетысуская область</option>
+            <option>Западно-Казахстанская область</option>
+            <option>Карагандинская область</option>
+            <option>Костанайская область</option>
+            <option>Кызылординская область</option>
+            <option>Мангистауская область</option>
+            <option>Павлодарская область</option>
+            <option>Северо-Казахстанская область</option>
+            <option>Туркестанская область</option>
+            <option>Улытауская область</option>
+        </optgroup>
+    </select>
+</div>
+    <div class="auth">
+        <a href="login.html" class="btn login">Войти</a>
+        <a href="registration.html" class="btn regist">Регистрация</a>
+    </div>
+</header>
+    <div class="auth-container">
+        <div class="auth-form">
+            <h2 class="navig">Социальная поддержка</h2>
+            <button>Пособие на рождение ребенка</button>
+            <button>Многодетным семьям</button>
+            <button>Выплаты по потере работы</button>
+            <button>Пенсионные выплаты</button>
+            <p class="opis">Мы поможем собрать документы без лишних визитов.</p>
+        </div>
+    </div>
+    <script src="Coins.js"></script>
+</body>
+</html>
